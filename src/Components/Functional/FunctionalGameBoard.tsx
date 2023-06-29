@@ -1,6 +1,7 @@
 import "./styles/game-board.css";
 import { Images } from "../../assets/Images";
-
+import { TSFishInfo } from "../../types";
+import { useState } from "react";
 const initialFishes = [
   {
     name: "trout",
@@ -20,17 +21,61 @@ const initialFishes = [
   },
 ];
 
-export function FunctionalGameBoard() {
-  const nextFishToName = initialFishes[0];
+export function FunctionalGameBoard({
+  getGameInformation,
+}: {
+  getGameInformation: (fishName: TSFishInfo) => void;
+}) {
+  const [inputFishName, setInputFishName] = useState("");
+  const [correctFishName, setCorrectFishName] = useState("");
+
+  const [index, setIndex] = useState(0);
+
+  const nextFishToName = initialFishes[index];
+
+  const [correctCount, setCorrectCount] = useState(0);
+  const [incorrectCount, setIncorrectCount] = useState(0);
+
   return (
     <div id="game-board">
       <div id="fish-container">
         <img src={nextFishToName.url} alt={nextFishToName.name} />
       </div>
-      <form id="fish-guess-form">
+      <form
+        id="fish-guess-form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          setIndex(index + 1);
+          getGameInformation({
+            fishName: inputFishName,
+
+            correctCount: correctCount,
+            incorrectCount: incorrectCount,
+            correctFishName: correctFishName,
+          });
+
+          setInputFishName("");
+        }}
+      >
         <label htmlFor="fish-guess">What kind of fish is this?</label>
-        <input type="text" name="fish-guess" />
-        <input type="submit" />
+        <input
+          type="text"
+          name="fish-guess"
+          value={inputFishName}
+          onChange={(e) => {
+            setInputFishName(e.target.value);
+            setCorrectFishName(nextFishToName.name);
+          }}
+        />
+
+        <input
+          type="submit"
+          onClick={() => {
+            inputFishName === correctFishName
+              ? setCorrectCount(correctCount + 1)
+              : setIncorrectCount(incorrectCount + 1);
+          }}
+        />
       </form>
     </div>
   );
