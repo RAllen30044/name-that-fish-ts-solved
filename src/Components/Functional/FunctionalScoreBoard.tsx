@@ -1,24 +1,14 @@
+import { TSScoreBoard } from "../../types";
 import "./styles/score-board.css";
 //  Where the score is presented
-import { TSFishInfo } from "../../types";
 
 const answersLeft = ["trout", "salmon", "tuna", "shark"];
 
 export function FunctionalScoreBoard({
-  gameInformation,
-}: {
-  gameInformation: TSFishInfo | null;
-}) {
-  const incorrectCount = gameInformation?.incorrectCount
-    ? gameInformation.incorrectCount
-    : 0;
-  const correctCount = gameInformation?.correctCount
-    ? gameInformation.correctCount
-    : 0;
-
-  const correctFishName = gameInformation?.correctFishName
-    ? gameInformation.correctFishName
-    : "";
+  incorrectCount,
+  correctCount,
+  correctFishName,
+}:TSScoreBoard) {
   const removeAnswer = correctFishName
     ? answersLeft.indexOf(correctFishName) + 1
     : 0;

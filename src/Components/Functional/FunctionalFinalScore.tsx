@@ -1,19 +1,10 @@
+import { TSFinalScore } from "../../types";
 import "./styles/final-score.css";
-import { TSFishInfo } from "../../types";
 
 export const FunctionalFinalScore = ({
-  gameInformation,
-}: {
-  gameInformation: TSFishInfo | null;
-}) => {
-  const incorrectCount = gameInformation?.incorrectCount
-    ? gameInformation.incorrectCount
-    : 0;
-  const correctCount = gameInformation?.correctCount
-    ? gameInformation.correctCount
-    : 0;
-  const totalCount = correctCount + incorrectCount;
-
+  totalCount,
+  correctCount,
+}: TSFinalScore) => {
   return (
     <div id="final-score">
       <h1>Your Final Score Was</h1>

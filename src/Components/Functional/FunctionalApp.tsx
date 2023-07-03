@@ -5,18 +5,12 @@ import { useState } from "react";
 import { TSFishInfo } from "../../types";
 
 export function FunctionalApp() {
-  const [gameInformation, setGameInformationName] = useState<TSFishInfo | null>(
+  const [gameInformation, setGameInformationName] = useState<TSFishInfo|null>(
     null
   );
-  const incorrectCount = gameInformation?.incorrectCount
-    ? gameInformation.incorrectCount
-    : 0;
-  const correctCount = gameInformation?.correctCount
-    ? gameInformation.correctCount
-    : 0;
-
-    
-
+  const correcFishName = gameInformation?.correctFishName ?? "";
+  const incorrectCount = gameInformation?.incorrectCount ?? 0;
+  const correctCount = gameInformation?.correctCount ?? 0;
 
   const totalCountInfo = correctCount + incorrectCount;
 
@@ -24,7 +18,11 @@ export function FunctionalApp() {
     <>
       {totalCountInfo < 4 ? (
         <div>
-          <FunctionalScoreBoard gameInformation={gameInformation} />
+          <FunctionalScoreBoard
+            correctCount={correctCount}
+            incorrectCount={incorrectCount}
+            correctFishName={correcFishName}
+          />
           <FunctionalGameBoard
             getGameInformation={(gameInformation) => {
               setGameInformationName(gameInformation);
@@ -32,7 +30,10 @@ export function FunctionalApp() {
           />
         </div>
       ) : (
-        <FunctionalFinalScore gameInformation={gameInformation} />
+        <FunctionalFinalScore
+          totalCount={totalCountInfo}
+          correctCount={correctCount}
+        />
       )}
     </>
   );

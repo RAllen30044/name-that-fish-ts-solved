@@ -53,7 +53,6 @@ export function FunctionalGameBoard({
             incorrectCount: incorrectCount,
             correctFishName: correctFishName,
           });
-
           setInputFishName("");
         }}
       >
@@ -67,11 +66,10 @@ export function FunctionalGameBoard({
             setCorrectFishName(nextFishToName.name);
           }}
         />
-
         <input
           type="submit"
           onClick={() => {
-            inputFishName === correctFishName
+            inputFishName.toLowerCase() === correctFishName
               ? setCorrectCount(correctCount + 1)
               : setIncorrectCount(incorrectCount + 1);
           }}
