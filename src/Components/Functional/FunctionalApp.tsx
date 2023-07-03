@@ -5,7 +5,7 @@ import { useState } from "react";
 import { TSFishInfo } from "../../types";
 
 export function FunctionalApp() {
-  const [gameInformation, setGameInformationName] = useState<TSFishInfo|null>(
+  const [gameInformation, setGameInformationName] = useState<TSFishInfo | null>(
     null
   );
   const correcFishName = gameInformation?.correctFishName ?? "";

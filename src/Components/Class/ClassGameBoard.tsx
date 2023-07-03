@@ -67,7 +67,9 @@ export class ClassGameBoard extends Component<TSGameInfo> {
             name="fish-guess"
             value={inputFishName}
             onChange={(e) => {
-              this.setState({ inputFishName: e.target.value.toLocaleLowerCase() });
+              this.setState({
+                inputFishName: e.target.value.toLocaleLowerCase(),
+              });
               this.setState({ correctFishName: nextFishToName.name });
             }}
           />

@@ -8,7 +8,7 @@ export function FunctionalScoreBoard({
   incorrectCount,
   correctCount,
   correctFishName,
-}:TSScoreBoard) {
+}: TSScoreBoard) {
   const removeAnswer = correctFishName
     ? answersLeft.indexOf(correctFishName) + 1
     : 0;

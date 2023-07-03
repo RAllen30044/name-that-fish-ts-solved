@@ -26,13 +26,10 @@ export function FunctionalGameBoard({
 }: {
   getGameInformation: (fishName: TSFishInfo) => void;
 }) {
+  const [index, setIndex] = useState(0);
+  const nextFishToName = initialFishes[index];
   const [inputFishName, setInputFishName] = useState("");
   const [correctFishName, setCorrectFishName] = useState("");
-
-  const [index, setIndex] = useState(0);
-
-  const nextFishToName = initialFishes[index];
-
   const [correctCount, setCorrectCount] = useState(0);
   const [incorrectCount, setIncorrectCount] = useState(0);
 
@@ -46,6 +43,7 @@ export function FunctionalGameBoard({
         onSubmit={(e) => {
           e.preventDefault();
           setIndex(index + 1);
+
           getGameInformation({
             fishName: inputFishName,
 

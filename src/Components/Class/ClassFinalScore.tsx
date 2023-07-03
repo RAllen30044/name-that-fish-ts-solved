@@ -3,7 +3,7 @@ import { TSFinalScore } from "../../types";
 
 export class ClassFinalScore extends Component<TSFinalScore> {
   render() {
-    const {correctCount, totalCount}=this.props;
+    const { correctCount, totalCount } = this.props;
 
     return (
       <div id="final-score">
