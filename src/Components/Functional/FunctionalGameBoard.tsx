@@ -1,7 +1,8 @@
 import "./styles/game-board.css";
 import { Images } from "../../assets/Images";
-import { TSFishInfo } from "../../types";
+import { TSGameInfo } from "../../types";
 import { useState } from "react";
+
 const initialFishes = [
   {
     name: "trout",
@@ -20,12 +21,7 @@ const initialFishes = [
     url: Images.shark,
   },
 ];
-
-export function FunctionalGameBoard({
-  getGameInformation,
-}: {
-  getGameInformation: (fishName: TSFishInfo) => void;
-}) {
+export function FunctionalGameBoard({ getGameInformation }: TSGameInfo) {
   const [index, setIndex] = useState(0);
   const nextFishToName = initialFishes[index];
   const [inputFishName, setInputFishName] = useState("");
@@ -59,8 +55,8 @@ export function FunctionalGameBoard({
           type="text"
           name="fish-guess"
           value={inputFishName}
-          onChange={(e) => {
-            setInputFishName(e.target.value);
+          onChange={({ target: { value } }) => {
+            setInputFishName(value);
             setCorrectFishName(nextFishToName.name);
           }}
         />

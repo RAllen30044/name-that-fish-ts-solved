@@ -9,19 +9,19 @@ export type TSFishInfo = {
 };
 
 export type TSGameInfo = {
-  getGameInformation: (fishName: TSFishInfo) => void;
-}
+  getGameInformation: (userInformation: TSFishInfo) => void;
+};
 
 export type ClassAppState = {
   gameInformation: TSFishInfo | null;
-}
+};
 
-export type TSFinalScore ={
+export type TSFinalScore = {
   totalCount: number;
   correctCount: number;
-}
-export type TSScoreBoard ={
+};
+export type TSScoreBoard = {
   incorrectCount: number;
   correctCount: number;
   correctFishName: string;
-}
+};
