@@ -2,15 +2,20 @@ import { FunctionalGameBoard } from "./FunctionalGameBoard";
 import { FunctionalScoreBoard } from "./FunctionalScoreBoard";
 import { FunctionalFinalScore } from "./FunctionalFinalScore";
 import { useState } from "react";
-import { TSFishInfo } from "../../types";
+import { initialFishes } from "../../types";
 
 export function FunctionalApp() {
-  const [gameInformation, setGameInformationName] = useState<TSFishInfo | null>(
-    null
-  );
-  const correcFishName = gameInformation?.correctFishName ?? "";
-  const incorrectCount = gameInformation?.incorrectCount ?? 0;
-  const correctCount = gameInformation?.correctCount ?? 0;
+  const answersLeft = initialFishes.map((fishName) => fishName.name);
+
+  const [correctCount, setCorrectCount] = useState(0);
+  const [incorrectCount, setIncorrectCount] = useState(0);
+  const [index, setIndex] = useState(0);
+  const handleAnswer: (name: string) => void = (name: string) => {
+    initialFishes[index].name === name
+      ? setCorrectCount(correctCount + 1)
+      : setIncorrectCount(incorrectCount + 1);
+    setIndex(index + 1);
+  };
 
   const totalCountInfo = correctCount + incorrectCount;
 
@@ -21,12 +26,12 @@ export function FunctionalApp() {
           <FunctionalScoreBoard
             correctCount={correctCount}
             incorrectCount={incorrectCount}
-            correctFishName={correcFishName}
+            answersLeft={answersLeft}
+            index={index}
           />
           <FunctionalGameBoard
-            getGameInformation={(gameInformation) => {
-              setGameInformationName(gameInformation);
-            }}
+            fishData={initialFishes[index]}
+            handleAnswer={handleAnswer}
           />
         </div>
       ) : (

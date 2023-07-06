@@ -2,16 +2,15 @@ import { Component } from "react";
 import "./styles/score-board.css";
 import { TSScoreBoard } from "../../types";
 
-const answersLeft = ["trout", "salmon", "tuna", "shark"];
 export class ClassScoreBoard extends Component<TSScoreBoard> {
   render() {
-    const { incorrectCount, correctCount, correctFishName } = this.props;
+    const { incorrectCount, correctCount, index } = this.props;
+    const { answersLeft } = this.props;
 
-    const removeAnswer = correctFishName
-      ? answersLeft.indexOf(correctFishName) + 1
-      : 0;
-
-    const remainingFishAnswers = answersLeft.slice(removeAnswer, 4);
+    const remainingFishAnswers = answersLeft.slice(
+      answersLeft.indexOf(answersLeft[index]),
+      4
+    );
 
     return (
       <div id="score-board">

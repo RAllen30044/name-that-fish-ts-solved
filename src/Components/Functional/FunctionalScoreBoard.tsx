@@ -1,19 +1,18 @@
 import { TSScoreBoard } from "../../types";
 import "./styles/score-board.css";
-//  Where the score is presented
 
-const answersLeft = ["trout", "salmon", "tuna", "shark"];
+//  Where the score is presented
 
 export function FunctionalScoreBoard({
   incorrectCount,
   correctCount,
-  correctFishName,
+  index,
+  answersLeft,
 }: TSScoreBoard) {
-  const removeAnswer = correctFishName
-    ? answersLeft.indexOf(correctFishName) + 1
-    : 0;
-
-  const remainingFishAnswers = answersLeft.slice(removeAnswer, 4);
+  const remainingFishAnswers = answersLeft.slice(
+    answersLeft.indexOf(answersLeft[index]),
+    4
+  );
 
   return (
     <div id="score-board">

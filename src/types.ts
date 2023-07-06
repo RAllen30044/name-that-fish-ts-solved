@@ -1,20 +1,51 @@
 // If you have any types that are SHARED BY MANY COMPONENTS,put them here
 
-export type TSFishInfo = {
-  fishName: string;
+import { Images } from "./assets/Images";
 
-  correctCount: number;
-  incorrectCount: number;
-  correctFishName: string;
+export const initialFishes = [
+  {
+    name: "trout",
+    url: Images.trout,
+  },
+  {
+    name: "salmon",
+    url: Images.salmon,
+  },
+  {
+    name: "tuna",
+    url: Images.tuna,
+  },
+  {
+    name: "shark",
+    url: Images.shark,
+  },
+];
+
+export type TSFishData = {
+  name: string,
+  url: string
 };
 
 export type TSGameInfo = {
-  getGameInformation: (userInformation: TSFishInfo) => void;
+  handleAnswer: (name:string) => void;
+  fishData:TSFishData
+ 
 };
 
+export type ClassAppData={
+  fishName: string;
+correctCount: number;
+incorrectCount: number;
+index: number;
+}
+
 export type ClassAppState = {
-  gameInformation: TSFishInfo | null;
+  gameInformation: ClassAppData| null;
 };
+
+export type TSClassGameInfo={
+  getGameInformation : (getGameInformation:ClassAppData|null)=>void;
+}
 
 export type TSFinalScore = {
   totalCount: number;
@@ -23,5 +54,6 @@ export type TSFinalScore = {
 export type TSScoreBoard = {
   incorrectCount: number;
   correctCount: number;
-  correctFishName: string;
+  index:number;
+  answersLeft: string[];
 };

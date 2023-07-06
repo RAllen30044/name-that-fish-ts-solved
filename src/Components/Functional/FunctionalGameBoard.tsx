@@ -1,73 +1,33 @@
 import "./styles/game-board.css";
-import { Images } from "../../assets/Images";
+
 import { TSGameInfo } from "../../types";
-import { useState } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 
-const initialFishes = [
-  {
-    name: "trout",
-    url: Images.trout,
-  },
-  {
-    name: "salmon",
-    url: Images.salmon,
-  },
-  {
-    name: "tuna",
-    url: Images.tuna,
-  },
-  {
-    name: "shark",
-    url: Images.shark,
-  },
-];
-export function FunctionalGameBoard({ getGameInformation }: TSGameInfo) {
-  const [index, setIndex] = useState(0);
-  const nextFishToName = initialFishes[index];
-  const [inputFishName, setInputFishName] = useState("");
-  const [correctFishName, setCorrectFishName] = useState("");
-  const [correctCount, setCorrectCount] = useState(0);
-  const [incorrectCount, setIncorrectCount] = useState(0);
+export function FunctionalGameBoard({ handleAnswer, fishData }: TSGameInfo) {
+  const [inputFishAnswer, setInputFishAnswer] = useState("");
 
+  const handlleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    handleAnswer(inputFishAnswer.toLowerCase());
+    setInputFishAnswer("");
+  };
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputFishAnswer(e.target.value);
+  };
   return (
     <div id="game-board">
       <div id="fish-container">
-        <img src={nextFishToName.url} alt={nextFishToName.name} />
+        <img src={fishData.url} alt={fishData.name} />
       </div>
-      <form
-        id="fish-guess-form"
-        onSubmit={(e) => {
-          e.preventDefault();
-          setIndex(index + 1);
-
-          getGameInformation({
-            fishName: inputFishName,
-
-            correctCount: correctCount,
-            incorrectCount: incorrectCount,
-            correctFishName: correctFishName,
-          });
-          setInputFishName("");
-        }}
-      >
+      <form id="fish-guess-form" onSubmit={handlleSubmit}>
         <label htmlFor="fish-guess">What kind of fish is this?</label>
         <input
           type="text"
           name="fish-guess"
-          value={inputFishName}
-          onChange={({ target: { value } }) => {
-            setInputFishName(value);
-            setCorrectFishName(nextFishToName.name);
-          }}
+          value={inputFishAnswer}
+          onChange={handleChange}
         />
-        <input
-          type="submit"
-          onClick={() => {
-            inputFishName.toLowerCase() === correctFishName
-              ? setCorrectCount(correctCount + 1)
-              : setIncorrectCount(incorrectCount + 1);
-          }}
-        />
+        <input type="submit" />
       </form>
     </div>
   );
